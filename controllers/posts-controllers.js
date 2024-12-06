@@ -1,11 +1,32 @@
 
 const posts = require('../db.js')
-
 const fs = require('fs')
+const connection = require('../db/connection.js')
+
 
 const index = (req, res) => {
-  res.json({ data: posts, count: posts.length })
-}
+  const sql = 'SELECT * FROM posts';
+
+  connection.query(sql, (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: err });
+    }
+    const responseData = {
+      data: results,
+      counter: results.length
+    };
+    res.status(200).json(responseData)
+  });
+
+};
+
+
+
+
+
+// const index = (req, res) => {
+//   res.json({ data: posts, count: posts.length })
+// }
 
 
 const show = (req, res) => {
