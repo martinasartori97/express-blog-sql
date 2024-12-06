@@ -2,7 +2,7 @@
 const posts = require('../db.js')
 const fs = require('fs')
 const connection = require("../db/connection.js");
-const { post } = require('../routes/posts.js');
+// const { post } = require('../routes/posts.js');
 
 
 const index = (req, res) => {
@@ -57,15 +57,15 @@ const destroy = (req, res) => {
 // }
 
 
-// const show = (req, res) => {
-//   console.log(req.params.slug);
+const show = (req, res) => {
+  console.log(req.params.slug);
 
-//   const FoundPost = posts.find((post) => post.slug === req.params.slug)
-//   if (!FoundPost) {
-//     return res.status(404).json({ error: "No posts found with that slug " })
-//   }
-//   return res.status(200).json({ data: FoundPost })
-// }
+  const FoundPost = posts.find((post) => post.slug === req.params.slug)
+  if (!FoundPost) {
+    return res.status(404).json({ error: "No posts found with that slug " })
+  }
+  return res.status(200).json({ data: FoundPost })
+}
 
 
 const store = (req, res) => {
