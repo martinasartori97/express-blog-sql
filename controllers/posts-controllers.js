@@ -21,6 +21,35 @@ const index = (req, res) => {
 };
 
 
+// const destroy = (req, res) => {
+//   const { slug } = req.params;
+//   connection.query('DELETE FROM POSTS WHERE SLUG = ?', [id], (err) => {
+//     if (err) return res.status(500).json({ error: err });
+//     res.sendStatus(204)
+//   });
+// }
+
+
+
+
+
+const destroy = (req, res) => {
+
+  console.log(req.params);
+  const id = req.params.slug
+  const sql = 'DELETE FROM POSTS WHERE slug=?'
+  connection.query(sql, [id], (err, results) => {
+    console.log(err, results);
+    if (err) return res.status(500).json({ error: err })
+
+    if (results.affectedRows === 0) return res.status(404).json({ error: `404! No post found with the this slug: ${slug}` })
+
+    return res.json({ status: 204, affectedRows: results.affectedRows })
+
+  })
+}
+
+
 
 
 
@@ -82,20 +111,20 @@ const update = (req, res) => {
 }
 
 
-const destroy = (req, res) => {
-  const foundPost = posts.find(post => post.slug === req.params.slug);
-  if (!foundPost) {
-    return res.status(404).json({ error: "No posts found with that slug" })
-  }
-  const newPosts = posts.filter((posts) => posts.slug !== req.params.slug);
-  fs.writeFileSync('./db.js', `module.exports = ${JSON.stringify(newPosts, null, 4)}`)
+// const destroy = (req, res) => {
+//   const foundPost = posts.find(post => post.slug === req.params.slug);
+//   if (!foundPost) {
+//     return res.status(404).json({ error: "No posts found with that slug" })
+//   }
+//   const newPosts = posts.filter((posts) => posts.slug !== req.params.slug);
+//   fs.writeFileSync('./db.js', `module.exports = ${JSON.stringify(newPosts, null, 4)}`)
 
-  res.status(200).json({
-    status: 200,
-    data: newPosts,
-    counter: newPosts.length
-  })
-}
+//   res.status(200).json({
+//     status: 200,
+//     data: newPosts,
+//     counter: newPosts.length
+//   })
+// }
 
 
 const notFoundMiddleware = (req, res, next) => {
