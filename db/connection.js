@@ -9,7 +9,7 @@ const connection = mysql.createConnection({
     // port: process.env.DB_PORT
     host: 'localhost',
     user: 'root',
-    password: '',
+    password: 'Follonica2024!',
     database: 'blog_db'
 })
 
