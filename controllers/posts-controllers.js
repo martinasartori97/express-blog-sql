@@ -35,19 +35,23 @@ const index = (req, res) => {
 
 const destroy = (req, res) => {
 
-  console.log(req.params);
-  const id = req.params.slug
-  const sql = 'DELETE FROM POSTS WHERE slug=?'
+  // console.log(req.params);
+  const id = req.params.id
+  const sql = 'DELETE FROM POSTS WHERE id=?'
   connection.query(sql, [id], (err, results) => {
     console.log(err, results);
     if (err) return res.status(500).json({ error: err })
 
-    if (results.affectedRows === 0) return res.status(404).json({ error: `404! No post found with the this slug: ${slug}` })
+    if (results.affectedRows === 0) return res.status(404).json({ error: `404! No post found with the this id: ${id}` })
 
     return res.json({ status: 204, affectedRows: results.affectedRows })
+    console.log(req.params);
+
 
   })
 }
+
+
 
 
 
