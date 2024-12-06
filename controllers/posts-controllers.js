@@ -1,7 +1,8 @@
 
 const posts = require('../db.js')
 const fs = require('fs')
-const connection = require("../db/connection.js")
+const connection = require("../db/connection.js");
+const { post } = require('../routes/posts.js');
 
 
 const index = (req, res) => {
@@ -20,14 +21,6 @@ const index = (req, res) => {
 
 };
 
-
-// const destroy = (req, res) => {
-//   const { slug } = req.params;
-//   connection.query('DELETE FROM POSTS WHERE SLUG = ?', [id], (err) => {
-//     if (err) return res.status(500).json({ error: err });
-//     res.sendStatus(204)
-//   });
-// }
 
 
 
@@ -57,20 +50,22 @@ const destroy = (req, res) => {
 
 
 
+
+
 // const index = (req, res) => {
 //   res.json({ data: posts, count: posts.length })
 // }
 
 
-const show = (req, res) => {
-  console.log(req.params.slug);
+// const show = (req, res) => {
+//   console.log(req.params.slug);
 
-  const FoundPost = posts.find((post) => post.slug === req.params.slug)
-  if (!FoundPost) {
-    return res.status(404).json({ error: "No posts found with that slug " })
-  }
-  return res.status(200).json({ data: FoundPost })
-}
+//   const FoundPost = posts.find((post) => post.slug === req.params.slug)
+//   if (!FoundPost) {
+//     return res.status(404).json({ error: "No posts found with that slug " })
+//   }
+//   return res.status(200).json({ data: FoundPost })
+// }
 
 
 const store = (req, res) => {
@@ -163,3 +158,4 @@ module.exports = {
   update,
   destroy
 }
+
