@@ -1,11 +1,11 @@
 
 const posts = require('../db.js')
 const fs = require('fs')
-const connection = require('../db/connection.js')
+const connection = require("../db/connection.js")
 
 
 const index = (req, res) => {
-  const sql = 'SELECT * FROM posts';
+  const sql = "SELECT * FROM posts";
 
   connection.query(sql, (err, results) => {
     if (err) {
