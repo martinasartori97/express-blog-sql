@@ -12,3 +12,7 @@ router.delete("/:id", PostsController.destroy)
 
 
 module.exports = router
+
+
+
+
